@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_about"
     android:layout_width="match_parent"
@@ -8,12 +8,422 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#292929"
+    android:background="@color/gray"
     tools:context="farmtechs.autofarm.AboutActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About activity"
-        android:textColor="#fff"/>
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/block1_box"
+                android:src="@drawable/green_box"
+                android:layout_alignTop="@+id/text_block1"
+                android:layout_alignBottom="@+id/text_block1"
+                android:layout_alignStart="@+id/text_block1"
+                android:layout_alignEnd="@+id/text_block1"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_block1"
+                android:text="Block 1"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:paddingBottom="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/m1label"
+                android:layout_below="@+id/text_block1"
+                android:text="Moisture Level:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:paddingTop="3dp"
+                android:layout_marginStart="70dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/m1box"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/m1text"
+                android:layout_alignBottom="@+id/m1text"
+                android:layout_alignStart="@+id/m1text"
+                android:layout_alignEnd="@+id/m1text"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/m1text"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/m1label"
+                android:layout_alignTop="@+id/m1label"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ch1label"
+                android:text="Checking Interval:"
+                android:layout_below="@+id/m1label"
+                android:layout_alignEnd="@+id/m1label"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:paddingTop="3dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ch1box"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/ch1text"
+                android:layout_alignBottom="@+id/ch1text"
+                android:layout_alignStart="@+id/ch1text"
+                android:layout_alignEnd="@+id/ch1text"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ch1text"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/ch1label"
+                android:layout_alignTop="@+id/ch1label"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+
+
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/block2_box"
+                android:src="@drawable/green_box"
+                android:layout_alignTop="@+id/text_block2"
+                android:layout_alignBottom="@+id/text_block2"
+                android:layout_alignStart="@+id/block1_box"
+                android:layout_alignEnd="@+id/block1_box"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_block2"
+                android:text="Block 2"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp"
+                android:layout_below="@+id/ch1label"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/m2label"
+                android:layout_below="@+id/text_block2"
+                android:text="Moisture Level:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:paddingTop="3dp"
+                android:layout_marginStart="70dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/m2box"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/m2text"
+                android:layout_alignBottom="@+id/m2text"
+                android:layout_alignStart="@+id/m2text"
+                android:layout_alignEnd="@+id/m2text"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/m2text"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/m2label"
+                android:layout_alignTop="@+id/m2label"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ch2label"
+                android:text="Checking Interval:"
+                android:layout_below="@+id/m2label"
+                android:layout_alignEnd="@+id/m2label"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:paddingTop="3dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ch2box"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/ch2text"
+                android:layout_alignBottom="@+id/ch2text"
+                android:layout_alignStart="@+id/ch2text"
+                android:layout_alignEnd="@+id/ch2text"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ch2text"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/ch2label"
+                android:layout_alignTop="@+id/ch2label"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+
+
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/block3_box"
+                android:src="@drawable/green_box"
+                android:layout_alignTop="@+id/text_block3"
+                android:layout_alignBottom="@+id/text_block3"
+                android:layout_alignStart="@+id/block2_box"
+                android:layout_alignEnd="@+id/block2_box"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_block3"
+                android:text="Block 3"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp"
+                android:layout_below="@+id/ch2text"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/m3label"
+                android:layout_below="@+id/text_block3"
+                android:text="Moisture Level:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:paddingTop="3dp"
+                android:layout_marginStart="70dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/m3box"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/m3text"
+                android:layout_alignBottom="@+id/m3text"
+                android:layout_alignStart="@+id/m3text"
+                android:layout_alignEnd="@+id/m3text"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/m3text"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/m3label"
+                android:layout_alignTop="@+id/m3label"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ch3label"
+                android:text="Checking Interval:"
+                android:layout_below="@+id/m3label"
+                android:layout_alignEnd="@+id/m3label"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:paddingTop="3dp"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ch3box"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/ch3text"
+                android:layout_alignBottom="@+id/ch3text"
+                android:layout_alignStart="@+id/ch3text"
+                android:layout_alignEnd="@+id/ch3text"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ch3text"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/ch3label"
+                android:layout_alignTop="@+id/ch3label"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+
+
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/pump_box"
+                android:src="@drawable/blue_box"
+                android:layout_alignTop="@+id/text_pump"
+                android:layout_alignBottom="@+id/text_pump"
+                android:layout_alignStart="@+id/block3_box"
+                android:layout_alignEnd="@+id/block3_box"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_pump"
+                android:text="Tank"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:textSize="30sp"
+                android:layout_below="@+id/ch3text"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wlabel"
+                android:layout_below="@+id/text_pump"
+                android:text="Water Level:"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
+                android:paddingTop="3dp"
+                android:layout_marginStart="70dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/wbox"
+                android:src="@drawable/whitebox"
+                android:layout_alignTop="@+id/wtext"
+                android:layout_alignBottom="@+id/wtext"
+                android:layout_alignStart="@+id/wtext"
+                android:layout_alignEnd="@+id/wtext"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wtext"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_toEndOf="@+id/wlabel"
+                android:layout_alignTop="@+id/wlabel"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                />
+
+        </RelativeLayout>
+
+</ScrollView>
