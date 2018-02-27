@@ -2,10 +2,14 @@ package farmtechs.autofarm;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.appcompat.BuildConfig;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -27,9 +31,24 @@ public class HomeActivity extends AppCompatActivity {
         final Button settings_btn = (Button) findViewById(R.id.settings_button);
         final Button about_btn = (Button) findViewById(R.id.about_button);
 
+        final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
+
+        if(settings.getBoolean("FIRST_TIME",true)){
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("FIRST_TIME", false);
+            editor.putBoolean("FIRST_BLOCK", false);
+            editor.putBoolean("SECOND_BLOCK", false);
+            editor.putBoolean("THIRD_BLOCK", false);
+            editor.apply();
+        }
+
         monitor_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
+
+
+
+
                 Intent monitor = new Intent(HomeActivity.this, MonitorActivity.class);
                 startActivity(monitor);
             }
@@ -50,8 +69,13 @@ public class HomeActivity extends AppCompatActivity {
                 {
                     public void onClick(View v) {
                         if(pressed1==0) {
-                            block_one.setBackgroundResource(R.drawable.green_square);
-                            pressed1=1;
+                            if(!settings.getBoolean("FIRST_BLOCK",true)){
+                                Toast.makeText(HomeActivity.this, "Block 1 is not enabled",
+                                        Toast.LENGTH_SHORT).show();
+                            }else{
+                                block_one.setBackgroundResource(R.drawable.green_square);
+                                pressed1=1;
+                            }
                         }
                         else{
                             block_one.setBackgroundResource(R.drawable.black_square);
@@ -64,8 +88,14 @@ public class HomeActivity extends AppCompatActivity {
                 {
                     public void onClick(View v) {
                         if(pressed2==0) {
-                            block_two.setBackgroundResource(R.drawable.green_square);
-                            pressed2=1;
+                            if(!settings.getBoolean("SECOND_BLOCK",true)){
+                                Toast.makeText(HomeActivity.this, "Block 2 is not enabled",
+                                        Toast.LENGTH_SHORT).show();
+                            }else{
+                                block_two.setBackgroundResource(R.drawable.green_square);
+                                pressed2=1;
+                            }
+
                         }
                         else{
                             block_two.setBackgroundResource(R.drawable.black_square);
@@ -78,8 +108,14 @@ public class HomeActivity extends AppCompatActivity {
                 {
                     public void onClick(View v) {
                         if(pressed3==0) {
-                            block_three.setBackgroundResource(R.drawable.green_square);
-                            pressed3=1;
+                            if(!settings.getBoolean("THIRD_BLOCK",true)){
+                                Toast.makeText(HomeActivity.this, "Block 3 is not enabled",
+                                        Toast.LENGTH_SHORT).show();
+                            }else{
+                                block_three.setBackgroundResource(R.drawable.green_square);
+                                pressed3=1;
+                            }
+
                         }
                         else{
                             block_three.setBackgroundResource(R.drawable.black_square);
@@ -125,8 +161,135 @@ public class HomeActivity extends AppCompatActivity {
         settings_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
-                Intent settings = new Intent(HomeActivity.this, SettingsActivity.class);
-                startActivity(settings);
+
+
+
+
+
+
+                final Dialog dialog = new Dialog(HomeActivity.this);
+                dialog.setContentView(R.layout.activity_enable);
+
+                final Button block_one = (Button) dialog.findViewById(R.id.block1_image);
+                final Button block_two = (Button) dialog.findViewById(R.id.block2_image);
+                final Button block_three = (Button) dialog.findViewById(R.id.block3_image);
+
+
+                final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
+                if(settings.getBoolean("FIRST_BLOCK",false)){
+                    block_one.setBackgroundResource(R.drawable.green_square);
+                    pressed1=1;
+                } else{
+                    block_one.setBackgroundResource(R.drawable.black_square);
+                }
+                if(settings.getBoolean("SECOND_BLOCK",false)){
+                    block_two.setBackgroundResource(R.drawable.green_square);
+                    pressed2=1;
+                } else{
+                    block_two.setBackgroundResource(R.drawable.black_square);
+                }
+                if(settings.getBoolean("THIRD_BLOCK",false)){
+                    block_three.setBackgroundResource(R.drawable.green_square);
+                    pressed3=1;
+                } else{
+                    block_three.setBackgroundResource(R.drawable.black_square);
+                }
+
+                block_one.setOnClickListener(new View.OnClickListener()
+                {
+                    public void onClick(View v) {
+                        if(pressed1==0) {
+                            block_one.setBackgroundResource(R.drawable.green_square);
+                            pressed1=1;
+                        }
+                        else{
+                            block_one.setBackgroundResource(R.drawable.black_square);
+                            pressed1=0;
+                        }
+                    }
+                });
+
+                block_two.setOnClickListener(new View.OnClickListener()
+                {
+                    public void onClick(View v) {
+                        if(pressed2==0) {
+                            block_two.setBackgroundResource(R.drawable.green_square);
+                            pressed2=1;
+                        }
+                        else{
+                            block_two.setBackgroundResource(R.drawable.black_square);
+                            pressed2=0;
+                        }
+                    }
+                });
+
+                block_three.setOnClickListener(new View.OnClickListener()
+                {
+                    public void onClick(View v) {
+                        if(pressed3==0) {
+                            block_three.setBackgroundResource(R.drawable.green_square);
+                            pressed3=1;
+                        }
+                        else{
+                            block_three.setBackgroundResource(R.drawable.black_square);
+                            pressed3=0;
+                        }
+                    }
+                });
+
+                Button enable = (Button) dialog.findViewById(R.id.enable_btn);
+                // if button is clicked, close the custom dialog
+                enable.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                            SharedPreferences.Editor editor = settings.edit();
+                            if(pressed1 == 1){
+                                editor.putBoolean("FIRST_BLOCK",true);
+                            }else if(pressed1 == 0){
+                                editor.putBoolean("FIRST_BLOCK",false);
+                            }
+                            if(pressed2 == 1){
+                                editor.putBoolean("SECOND_BLOCK",true);
+                            }else if(pressed2 == 0){
+                                editor.putBoolean("SECOND_BLOCK",false);
+                            }
+                            if(pressed3 == 1){
+                                editor.putBoolean("THIRD_BLOCK",true);
+                            }else if(pressed3 == 0){
+                                editor.putBoolean("THIRD_BLOCK",false);
+                            }
+                            editor.apply();
+
+                            //block_one.setBackgroundResource(R.drawable.black_square);
+                            //block_two.setBackgroundResource(R.drawable.black_square);
+                            //block_three.setBackgroundResource(R.drawable.black_square);
+                            pressed1 = 0;
+                            pressed2 = 0;
+                            pressed3 = 0;
+
+                            Toast.makeText(HomeActivity.this, "Changes applied",
+                                    Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(1000,1150);
+
+
+
+
+
+
+
+
+
+
+
+                //Intent settings = new Intent(HomeActivity.this, SettingsActivity.class);
+                //startActivity(settings);
             }
         });
 
@@ -138,6 +301,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {

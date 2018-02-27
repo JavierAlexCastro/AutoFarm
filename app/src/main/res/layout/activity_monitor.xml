@@ -17,4 +17,11 @@
         android:text="Camera activity"
         android:textColor="#fff"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/clear_button"
+        android:layout_centerHorizontal="true"
+        android:text="clear"/>
+
 </RelativeLayout>
