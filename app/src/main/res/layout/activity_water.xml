@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_water"
-    android:layout_width="340dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="16dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/instr_text"
-        android:text="Select a block(s)"
+        android:text="@string/select_a_block"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_marginTop="35dp"/>
@@ -27,7 +27,7 @@
         android:layout_toStartOf="@+id/block2_image"
         android:layout_alignTop="@+id/block2_image"
         android:scaleType="fitXY"
-        android:text="1"
+        android:text="@string/number_1"
         android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="@color/white" />
@@ -41,7 +41,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/instr_text"
         android:layout_marginTop="35dp"
-        android:text="2"
+        android:text="@string/number_2"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/white"/>
@@ -54,7 +54,7 @@
         android:scaleType="fitXY"
         android:layout_alignTop="@+id/block2_image"
         android:layout_toEndOf="@+id/block2_image"
-        android:text="3"
+        android:text="@string/number_3"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"/>

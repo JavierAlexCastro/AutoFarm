@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AutoFarm</string>
+    <string name="select_a_block">Select a block(s)</string>
+    <string name="number_1">1</string>
+    <string name="number_2">2</string>
+    <string name="number_3">3</string>
+    <string name="select_blocks_to_enable">Select block(s) to enable</string>
 </resources>

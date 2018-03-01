@@ -1,5 +1,6 @@
 package farmtechs.autofarm;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -154,7 +156,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 dialog.show();
                 Window window = dialog.getWindow();
-                window.setLayout(1000,1150);
+                //window.setLayout(1000,1150);
+                window.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
             }
         });
 
@@ -276,8 +279,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 dialog.show();
                 Window window = dialog.getWindow();
-                window.setLayout(1000,1150);
-
+                //window.setLayout(1000,1150);
+                window.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
 
 
