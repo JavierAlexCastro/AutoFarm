@@ -24,6 +24,7 @@ public class WaterSensor {
         int level = 0; //temporal level
         //procedure to get water level from sensor
         //must return an int
+        //probably will be need to be a float
         return level;
     }
 }
