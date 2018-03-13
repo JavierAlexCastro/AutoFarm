@@ -49,9 +49,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
-
-
                 Intent monitor = new Intent(HomeActivity.this, MonitorActivity.class);
                 startActivity(monitor);
             }
