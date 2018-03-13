@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
                 Intent monitor = new Intent(HomeActivity.this, MonitorActivity.class);
                 startActivity(monitor);
             }
