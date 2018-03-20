@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.appcompat.BuildConfig;
@@ -15,6 +16,23 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -47,6 +65,29 @@ public class HomeActivity extends AppCompatActivity {
         monitor_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
+                //Creates Client and post header with Pi's IP
+                /*HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://192.168.0.35/cgi-bin/camera.sh");
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+                nameValuePairs.add(new BasicNameValuePair("camera", "1"));//?
+
+                //encode post data
+                try {
+                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                //execute post request
+                try {
+                    httpclient.execute(httppost);
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+                new Background_get().execute("camera.sh");
+
 
 
                 Intent monitor = new Intent(HomeActivity.this, MonitorActivity.class);
@@ -162,11 +203,6 @@ public class HomeActivity extends AppCompatActivity {
         settings_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
-
-
-
-
-
 
                 final Dialog dialog = new Dialog(HomeActivity.this);
                 dialog.setContentView(R.layout.activity_enable);
@@ -301,8 +337,33 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(about);
             }
         });
+
     }
 
+    private class Background_get extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                /* Change the IP to the IP you set in the arduino sketch */
+                URL url = new URL("http:/129.107.116.224/cgi-bin/"+params[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder result = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null)
+                    result.append(inputLine).append("\n");
+
+                in.close();
+                connection.disconnect();
+                return result.toString();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
     @Override
     public void onBackPressed() {
