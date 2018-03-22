@@ -37,7 +37,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    int pressed1 = 0;
+    int pressed1 = 0; //1 if true, 0 if false
     int pressed2 = 0;
     int pressed3 = 0;
 
@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }*/
-                new Background_get().execute("camera.sh");
+                new Background_get().execute("camera.sh", " ");
 
 
 
@@ -172,24 +172,40 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
 
-                        if (pressed1 == 0 && pressed2 == 0 && pressed3 == 0) {
+                        if (pressed1 == 0 && pressed2 == 0 && pressed3 == 0) {                  // 0 0 0
                             Toast.makeText(HomeActivity.this, "Select at least one block",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-
-                            /**call different functions based on pressed1, pressed2, pressed3 values (Raspberry Pi)**/
-
-                            block_one.setBackgroundResource(R.drawable.black_square);
-                            block_two.setBackgroundResource(R.drawable.black_square);
-                            block_three.setBackgroundResource(R.drawable.black_square);
-                            pressed1 = 0;
-                            pressed2 = 0;
-                            pressed3 = 0;
-
-                            Toast.makeText(HomeActivity.this, "Watering plant(s)",
-                                    Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+                            if (pressed1 == 1 && pressed2 == 1 && pressed3 == 1) {             // 1 1 1
+                                new Background_get().execute("water.php", "water=1");
+                            } else if (pressed1 == 1 && pressed2 == 1 && pressed3 == 0) {      // 1 1 0
+                                new Background_get().execute("water.php", "water=2");
+                            } else if (pressed1 == 1 && pressed2 == 0 && pressed3 == 1) {      // 1 0 1
+                                new Background_get().execute("water.php", "water=3");
+                            } else if (pressed1 == 1 && pressed2 == 0 && pressed3 == 0) {      // 1 0 0
+                                new Background_get().execute("water.php", "water=4");
+                            } else if (pressed1 == 0 && pressed2 == 1 && pressed3 == 1) {      // 0 1 1
+                                new Background_get().execute("water.php", "water=5");
+                            } else if (pressed1 == 0 && pressed2 == 1 && pressed3 == 0) {      // 0 1 0
+                                new Background_get().execute("water.php", "water=6");
+                            } else if (pressed1 == 0 && pressed2 == 0 && pressed3 == 1) {      // 0 0 1
+                                new Background_get().execute("water.php", "water=7");
+                            }
                         }
+
+                        //log.d("argument[0]", argument[0]);
+                        /**call different functions based on pressed1, pressed2, pressed3 values (Raspberry Pi)**/
+
+                        block_one.setBackgroundResource(R.drawable.black_square);
+                        block_two.setBackgroundResource(R.drawable.black_square);
+                        block_three.setBackgroundResource(R.drawable.black_square);
+                        pressed1 = 0;
+                        pressed2 = 0;
+                        pressed3 = 0;
+
+                        Toast.makeText(HomeActivity.this, "Watering plant(s)",
+                            Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }
                 });
 
@@ -298,9 +314,24 @@ public class HomeActivity extends AppCompatActivity {
                             }
                             editor.apply();
 
-                            //block_one.setBackgroundResource(R.drawable.black_square);
-                            //block_two.setBackgroundResource(R.drawable.black_square);
-                            //block_three.setBackgroundResource(R.drawable.black_square);
+                            if(pressed1==1 && pressed2==1 && pressed3==1) {             // 1 1 1
+                                new Background_get().execute("pumps.php", "pump=1");
+                            } else if(pressed1==1 && pressed2==1 && pressed3==0) {      // 1 1 0
+                                new Background_get().execute("pumps.php", "pump=2");
+                            } else if(pressed1==1 && pressed2==0 && pressed3==1) {      // 1 0 1
+                                new Background_get().execute("pumps.php", "pump=3");
+                            } else if(pressed1==1 && pressed2==0 && pressed3==0) {      // 1 0 0
+                                new Background_get().execute("pumps.php", "pump=4");
+                            } else if(pressed1==0 && pressed2==1 && pressed3==1) {      // 0 1 1
+                                new Background_get().execute("pumps.php", "pump=5");
+                            } else if(pressed1==0 && pressed2==1 && pressed3==0) {      // 0 1 0
+                                new Background_get().execute("pumps.php", "pump=6");
+                            } else if(pressed1==0 && pressed2==0 && pressed3==1) {      // 0 0 1
+                                new Background_get().execute("pumps.php", "pump=7");
+                            } else if(pressed1==0 && pressed2==0 && pressed3==0) {      // 0 0 0
+                                new Background_get().execute("pumps.php", "pump=8");
+                            }
+
                             pressed1 = 0;
                             pressed2 = 0;
                             pressed3 = 0;
@@ -345,7 +376,7 @@ public class HomeActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 /* Change the IP to the IP you set in the arduino sketch */
-                URL url = new URL("http:/129.107.116.224/cgi-bin/"+params[0]);
+                URL url = new URL("http:/129.107.116.224/cgi-bin/"+params[0]+"?"+params[1]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));

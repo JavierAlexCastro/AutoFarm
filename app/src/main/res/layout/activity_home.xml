@@ -25,7 +25,7 @@
         android:id="@+id/monitor_button"
         android:background="@drawable/monitor_button_effect"
         android:layout_below="@+id/logo"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="75dp"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="15dp"
         />
