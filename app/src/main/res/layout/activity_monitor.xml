@@ -24,4 +24,12 @@
         android:layout_centerHorizontal="true"
         android:text="clear"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/camera_image"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/clear_button"
+        android:layout_marginTop="95dp"/>
+
 </RelativeLayout>
