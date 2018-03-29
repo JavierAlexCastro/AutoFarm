@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class MonitorActivity extends AppCompatActivity {
@@ -38,7 +40,6 @@ public class MonitorActivity extends AppCompatActivity {
             }
         });
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -60,6 +61,8 @@ public class MonitorActivity extends AppCompatActivity {
         ImageView picture=(ImageView)findViewById(R.id.camera_image);
         Picasso.with(picture.getContext())
                 .load("http://129.107.116.224/image.jpg")
-                .resize(250,250).into(picture);
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .resize(300,300).into(picture);
     }
 }
