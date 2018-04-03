@@ -188,7 +188,7 @@ public class HomeActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             if (pressed1 == 1 && pressed2 == 1 && pressed3 == 1) {             // 1 1 1
-                                new Background_get().execute("water.php", "water=1");
+                                new Background_get().execute("test.php", "water=1");
                             } else if (pressed1 == 1 && pressed2 == 1 && pressed3 == 0) {      // 1 1 0
                                 new Background_get().execute("water.php", "water=2");
                             } else if (pressed1 == 1 && pressed2 == 0 && pressed3 == 1) {      // 1 0 1
@@ -202,6 +202,8 @@ public class HomeActivity extends AppCompatActivity {
                             } else if (pressed1 == 0 && pressed2 == 0 && pressed3 == 1) {      // 0 0 1
                                 new Background_get().execute("water.php", "water=7");
                             }
+                            Toast.makeText(HomeActivity.this, "Watering plant(s)",
+                                    Toast.LENGTH_SHORT).show();
                         }
 
                         //log.d("argument[0]", argument[0]);
@@ -214,8 +216,6 @@ public class HomeActivity extends AppCompatActivity {
                         pressed2 = 0;
                         pressed3 = 0;
 
-                        Toast.makeText(HomeActivity.this, "Watering plant(s)",
-                            Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
