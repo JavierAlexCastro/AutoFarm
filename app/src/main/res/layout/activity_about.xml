@@ -35,7 +35,7 @@
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:textStyle="bold"
                 android:paddingTop="5dp"
                 android:paddingEnd="5dp"
@@ -86,37 +86,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ch1label"
-                android:text="Checking Interval:"
-                android:layout_below="@+id/m1label"
-                android:layout_alignEnd="@+id/m1label"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingTop="3dp"
-                />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ch1box"
-                android:src="@drawable/whitebox"
-                android:layout_alignTop="@+id/ch1text"
-                android:layout_alignBottom="@+id/ch1text"
-                android:layout_alignStart="@+id/ch1text"
-                android:layout_alignEnd="@+id/ch1text"
-                android:scaleType="fitXY"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/ch1text"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:layout_toEndOf="@+id/ch1label"
-                android:layout_alignTop="@+id/ch1label"
+                android:layout_toEndOf="@+id/m1label"
+                android:layout_alignTop="@+id/m1label"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="5dp"
@@ -149,7 +124,7 @@
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
-                android:layout_below="@+id/ch1label"
+                android:layout_below="@+id/m1label"
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:paddingStart="5dp"
@@ -200,48 +175,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ch2label"
-                android:text="Checking Interval:"
-                android:layout_below="@+id/m2label"
-                android:layout_alignEnd="@+id/m2label"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingTop="3dp"
-                />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ch2box"
-                android:src="@drawable/whitebox"
-                android:layout_alignTop="@+id/ch2text"
-                android:layout_alignBottom="@+id/ch2text"
-                android:layout_alignStart="@+id/ch2text"
-                android:layout_alignEnd="@+id/ch2text"
-                android:scaleType="fitXY"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/ch2text"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:layout_toEndOf="@+id/ch2label"
-                android:layout_alignTop="@+id/ch2label"
+                android:layout_toEndOf="@+id/m2label"
+                android:layout_alignTop="@+id/m2label"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="5dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 />
-
-
-
-
-
 
             <ImageView
                 android:layout_width="match_parent"
@@ -314,47 +259,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ch3label"
-                android:text="Checking Interval:"
-                android:layout_below="@+id/m3label"
-                android:layout_alignEnd="@+id/m3label"
-                android:layout_marginTop="15dp"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingTop="3dp"
-                />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/ch3box"
-                android:src="@drawable/whitebox"
-                android:layout_alignTop="@+id/ch3text"
-                android:layout_alignBottom="@+id/ch3text"
-                android:layout_alignStart="@+id/ch3text"
-                android:layout_alignEnd="@+id/ch3text"
-                android:scaleType="fitXY"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/ch3text"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:layout_toEndOf="@+id/ch3label"
-                android:layout_alignTop="@+id/ch3label"
+                android:layout_toEndOf="@+id/m3label"
+                android:layout_alignTop="@+id/m3label"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginStart="5dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 />
-
-
-
-
 
             <ImageView
                 android:layout_width="match_parent"
@@ -388,7 +304,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/wlabel"
                 android:layout_below="@+id/text_pump"
-                android:text="Water Level:"
+                android:text="Has Water:"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
@@ -425,5 +341,4 @@
                 />
 
         </RelativeLayout>
-
 </ScrollView>

@@ -55,26 +55,33 @@ public class AboutActivity extends AppCompatActivity {
             block3.setImageAlpha(255);
         }
 
-        TextView m1text = (TextView)findViewById(R.id.m1text);
-        m1text.setText(String.valueOf(AutoFarm.getmSensor1().getMoisture()) + "%");
 
-        TextView ch1text = (TextView)findViewById(R.id.ch1text);
-        ch1text.setText(String.valueOf(AutoFarm.getmSensor1().getCheckInterval()) + " hours");
+        TextView m1text = (TextView)findViewById(R.id.m1text);
+        if(!settings.getBoolean("FIRST_BLOCK",true)) {
+            m1text.setText("disabled");
+        }else {
+            m1text.setText(String.valueOf(AutoFarm.getmSensor1().getMoisture()) + "");
+        }
 
         TextView m2text = (TextView)findViewById(R.id.m2text);
-        m2text.setText(String.valueOf(AutoFarm.getmSensor2().getMoisture()) + "%");
-
-        TextView ch2text = (TextView)findViewById(R.id.ch2text);
-        ch2text.setText(String.valueOf(AutoFarm.getmSensor2().getCheckInterval()) + " hours");
+        if(!settings.getBoolean("SECOND_BLOCK",true)) {
+            m2text.setText("disabled");
+        }else {
+            m2text.setText(String.valueOf(AutoFarm.getmSensor2().getMoisture()) + "");
+        }
 
         TextView m3text = (TextView)findViewById(R.id.m3text);
-        m3text.setText(String.valueOf(AutoFarm.getmSensor3().getMoisture()) + "%");
-
-        TextView ch3text = (TextView)findViewById(R.id.ch3text);
-        ch3text.setText(String.valueOf(AutoFarm.getmSensor3().getCheckInterval()) + " hours");
+        if(!settings.getBoolean("THIRD_BLOCK",true)) {
+            m3text.setText("disabled");
+        }else {
+            m3text.setText(String.valueOf(AutoFarm.getmSensor3().getMoisture()) + "");
+        }
 
         TextView wtext = (TextView)findViewById(R.id.wtext);
-        wtext.setText(String.valueOf(AutoFarm.getWSensor().getLevel()) + "%");
+        if(AutoFarm.wSensor.getWater())
+            wtext.setText("Yes");
+        else
+            wtext.setText("No");
     }
 
     @Override

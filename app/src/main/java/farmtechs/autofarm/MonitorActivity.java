@@ -1,5 +1,6 @@
 package farmtechs.autofarm;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +8,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.squareup.picasso.MemoryPolicy;
@@ -21,7 +24,20 @@ public class MonitorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
 
-        final Button clear_btn = (Button) findViewById(R.id.clear_button);
+        //dialog to launch a progress bar while the app waits to retrieve image from server
+        final ProgressDialog dialog = ProgressDialog.show(this, "", "Fetching image from server..",
+                true);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 7000);
+
+        //////////////////button set to reset all pumps to disabled
+        /*final Button clear_btn = (Button) findViewById(R.id.clear_button);
 
         clear_btn.setOnClickListener(new View.OnClickListener()
         {
@@ -38,14 +54,14 @@ public class MonitorActivity extends AppCompatActivity {
                 Intent home = new Intent(MonitorActivity.this, HomeActivity.class);
                 startActivity(home);
             }
-        });
+        });*/
 
-        Handler handler = new Handler();
+        //Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 getImage();
             }
-        }, 6000);   //5 seconds
+        }, 6000);   //wait 6 seconds, then attempt to get image from server (why? PiCamera takes 6 secs to execute)
 
 
     }

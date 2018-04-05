@@ -21,17 +21,21 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import java.io.IOException;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 //import com.squareup.picasso.Picasso;
 
-import org.apache.http.NameValuePair;
+/*import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.ByteArrayBuffer;
+import org.apache.http.util.ByteArrayBuffer;*/
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -40,10 +44,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -70,6 +79,9 @@ public class HomeActivity extends AppCompatActivity {
             editor.putBoolean("FIRST_BLOCK", false);
             editor.putBoolean("SECOND_BLOCK", false);
             editor.putBoolean("THIRD_BLOCK", false);
+            //editor.putInt("SENSOR_ONE", 0);
+            //editor.putInt("SENSOR_TWO", 0);
+            //editor.putInt("SENSOR_THREE", 0);
             editor.apply();
         }
 
@@ -99,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
                 }*/
 
                 /////////////////working///////////////////////////
-                new Background_get().execute("camera.sh", " ");
+                new Background_get().execute("cgi-bin/camera.sh", " ");
 
                 Intent monitor = new Intent(HomeActivity.this, MonitorActivity.class);
                 startActivity(monitor);
@@ -188,19 +200,19 @@ public class HomeActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             if (pressed1 == 1 && pressed2 == 1 && pressed3 == 1) {             // 1 1 1
-                                new Background_get().execute("test.php", "water=1");
+                                new Background_get().execute("cgi-bin/water.php", "water=1");
                             } else if (pressed1 == 1 && pressed2 == 1 && pressed3 == 0) {      // 1 1 0
-                                new Background_get().execute("water.php", "water=2");
+                                new Background_get().execute("cgi-bin/water.php", "water=2");
                             } else if (pressed1 == 1 && pressed2 == 0 && pressed3 == 1) {      // 1 0 1
-                                new Background_get().execute("water.php", "water=3");
+                                new Background_get().execute("cgi-bin/water.php", "water=3");
                             } else if (pressed1 == 1 && pressed2 == 0 && pressed3 == 0) {      // 1 0 0
-                                new Background_get().execute("water.php", "water=4");
+                                new Background_get().execute("cgi-bin/water.php", "water=4");
                             } else if (pressed1 == 0 && pressed2 == 1 && pressed3 == 1) {      // 0 1 1
-                                new Background_get().execute("water.php", "water=5");
+                                new Background_get().execute("cgi-bin/water.php", "water=5");
                             } else if (pressed1 == 0 && pressed2 == 1 && pressed3 == 0) {      // 0 1 0
-                                new Background_get().execute("water.php", "water=6");
+                                new Background_get().execute("cgi-bin/water.php", "water=6");
                             } else if (pressed1 == 0 && pressed2 == 0 && pressed3 == 1) {      // 0 0 1
-                                new Background_get().execute("water.php", "water=7");
+                                new Background_get().execute("cgi-bin/water.php", "water=7");
                             }
                             Toast.makeText(HomeActivity.this, "Watering plant(s)",
                                     Toast.LENGTH_SHORT).show();
@@ -326,21 +338,21 @@ public class HomeActivity extends AppCompatActivity {
                             editor.apply();
 
                             if(pressed1==1 && pressed2==1 && pressed3==1) {             // 1 1 1
-                                new Background_get().execute("pumps.php", "pump=1");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=1");
                             } else if(pressed1==1 && pressed2==1 && pressed3==0) {      // 1 1 0
-                                new Background_get().execute("pumps.php", "pump=2");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=2");
                             } else if(pressed1==1 && pressed2==0 && pressed3==1) {      // 1 0 1
-                                new Background_get().execute("pumps.php", "pump=3");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=3");
                             } else if(pressed1==1 && pressed2==0 && pressed3==0) {      // 1 0 0
-                                new Background_get().execute("pumps.php", "pump=4");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=4");
                             } else if(pressed1==0 && pressed2==1 && pressed3==1) {      // 0 1 1
-                                new Background_get().execute("pumps.php", "pump=5");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=5");
                             } else if(pressed1==0 && pressed2==1 && pressed3==0) {      // 0 1 0
-                                new Background_get().execute("pumps.php", "pump=6");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=6");
                             } else if(pressed1==0 && pressed2==0 && pressed3==1) {      // 0 0 1
-                                new Background_get().execute("pumps.php", "pump=7");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=7");
                             } else if(pressed1==0 && pressed2==0 && pressed3==0) {      // 0 0 0
-                                new Background_get().execute("pumps.php", "pump=8");
+                                new Background_get().execute("cgi-bin/pumps.php", "pump=8");
                             }
 
                             pressed1 = 0;
@@ -357,24 +369,14 @@ public class HomeActivity extends AppCompatActivity {
                 Window window = dialog.getWindow();
                 //window.setLayout(1000,1150);
                 window.setLayout(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
-
-
-
-
-
-
-
-
-
-
-                //Intent settings = new Intent(HomeActivity.this, SettingsActivity.class);
-                //startActivity(settings);
             }
         });
 
         about_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
+                new Background_get().execute("sensors.txt", " ");
+
                 Intent about = new Intent(HomeActivity.this, AboutActivity.class);
                 startActivity(about);
             }
@@ -387,17 +389,37 @@ public class HomeActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
                 /* Change the IP to the IP you set in the arduino sketch */
-                URL url = new URL("http:/129.107.116.224/cgi-bin/"+params[0]+"?"+params[1]);
+                URL url = new URL("http:/129.107.116.224/"+params[0]+"?"+params[1]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
                 String inputLine;
+                int i=0;
                 while ((inputLine = in.readLine()) != null)
+                    if (params[0].equals("sensors.txt")) {
+                        if (i == 0) {
+                            Log.d("adding m1: ", inputLine);
+                            AutoFarm.mSensor1.setMoisture(inputLine);
+                            Log.d("added m1: ", String.valueOf(AutoFarm.getmSensor1().getMoisture()));
+                        }else if (i == 1) {
+                            Log.d("adding m2: ", inputLine);
+                            AutoFarm.mSensor2.setMoisture(inputLine);
+                            Log.d("added m2: ", String.valueOf(AutoFarm.getmSensor2().getMoisture()));
+                        }else if (i == 2) {
+                            Log.d("adding m3: ", inputLine);
+                            AutoFarm.mSensor3.setMoisture(inputLine);
+                            Log.d("added m3: ", String.valueOf(AutoFarm.getmSensor3().getMoisture()));
+                        }else {
+                            Log.d("out of bounds. Index: ", String.valueOf(i));
+                        }
+                        i++;
+                    }
                     result.append(inputLine).append("\n");
 
                 in.close();
                 connection.disconnect();
+                //Log.d("returned:", result.toString());
                 return result.toString();
 
             } catch (IOException e) {
@@ -426,4 +448,5 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }).setNegativeButton("No", null).show();
     }
+
 }
