@@ -67,7 +67,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/block2_image"
         android:layout_marginTop="40dp"
-        android:background="@drawable/water_button_effect"/>
+        android:background="@drawable/apply_button_effect"/>
 
 
 </RelativeLayout>
