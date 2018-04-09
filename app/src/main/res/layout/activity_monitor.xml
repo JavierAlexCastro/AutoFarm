@@ -8,18 +8,52 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#292929"
+    android:background="@color/gray"
     tools:context="farmtechs.autofarm.MonitorActivity">
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="My system"
+        android:id="@+id/title"
+        android:textColor="@color/white"
+        android:textSize="60sp"
+        android:layout_marginTop="40dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:id="@+id/time"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image_frame"
+        android:background="@drawable/green_square"
+        android:layout_alignTop="@+id/camera_image"
+        android:layout_alignBottom="@+id/camera_image"
+        android:layout_alignStart="@+id/camera_image"
+        android:layout_alignEnd="@+id/camera_image"
+        android:scaleType="fitXY"/>
 
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:id="@+id/camera_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"/>
+        android:layout_below="@+id/time"
+        android:layout_marginTop="60dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingStart="5dp"
+        android:paddingBottom="5dp"/>
+
+
 
 </RelativeLayout>

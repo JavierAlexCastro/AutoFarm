@@ -12,10 +12,14 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class MonitorActivity extends AppCompatActivity {
 
@@ -23,6 +27,12 @@ public class MonitorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
+
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
+        // textView is the TextView view that should display it
+        TextView timestamp = (TextView)findViewById(R.id.time);
+        timestamp.setText("Taken: "+currentDateTimeString);
 
         //dialog to launch a progress bar while the app waits to retrieve image from server
         final ProgressDialog dialog = ProgressDialog.show(this, "", "Fetching image from server..",
@@ -34,7 +44,7 @@ public class MonitorActivity extends AppCompatActivity {
             public void run() {
                 dialog.dismiss();
             }
-        }, 7000);
+        }, 2000);
 
         //////////////////button set to reset all pumps to disabled
         /*final Button clear_btn = (Button) findViewById(R.id.clear_button);
@@ -61,7 +71,7 @@ public class MonitorActivity extends AppCompatActivity {
             public void run() {
                 getImage();
             }
-        }, 6000);   //wait 6 seconds, then attempt to get image from server (why? PiCamera takes 6 secs to execute)
+        }, 2000);   //wait 6 seconds, then attempt to get image from server (why? PiCamera takes 6 secs to execute)
 
 
     }
