@@ -10,19 +10,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //amazon AWS
-        /*import com.amazonaws.mobile.client.AWSMobileClient;
-
-        public class YourMainActivity extends Activity {
-            @Override
-            protected void onCreate(Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-
-                AWSMobileClient.getInstance().initialize(this).execute();
-            }
-        }*/
-
-
         MoistureSensor ms1 = new MoistureSensor();
         AutoFarm.setMSensor1(ms1);
 

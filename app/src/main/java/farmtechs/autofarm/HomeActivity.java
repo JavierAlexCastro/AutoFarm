@@ -1,51 +1,25 @@
 package farmtechs.autofarm;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.appcompat.BuildConfig;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 import java.io.IOException;
-
-//import com.squareup.picasso.Picasso;
-
-/*import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.ByteArrayBuffer;*/
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -81,33 +55,10 @@ public class HomeActivity extends AppCompatActivity {
         monitor_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
-                //Creates Client and post header with Pi's IP
-                /*HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://192.168.0.35/cgi-bin/camera.sh");
-
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("camera", "1"));//?
-
-                //encode post data
-                try {
-                    httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                //execute post request
-                try {
-                    httpclient.execute(httppost);
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-
-                /////////////////working///////////////////////////
-                new Background_get().execute("cgi-bin/camera.sh", " ");
+                new Background_get().execute("cgi-bin/camera.sh", " "); //call camera script on pi
 
                 Intent monitor = new Intent(HomeActivity.this, MonitorActivity.class);
-                startActivity(monitor);
+                startActivity(monitor); //launch monitor activity
             }
         });
 
@@ -115,21 +66,21 @@ public class HomeActivity extends AppCompatActivity {
         {
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(HomeActivity.this);
-                dialog.setContentView(R.layout.activity_water);
+                final Dialog dialog = new Dialog(HomeActivity.this); //create dialog
+                dialog.setContentView(R.layout.activity_water); //sets layout to dialog
 
-                final Button block_one = (Button) dialog.findViewById(R.id.block1_image);
+                final Button block_one = (Button) dialog.findViewById(R.id.block1_image); //get button context
                 final Button block_two = (Button) dialog.findViewById(R.id.block2_image);
                 final Button block_three = (Button) dialog.findViewById(R.id.block3_image);
 
-                block_one.setOnClickListener(new View.OnClickListener()
+                block_one.setOnClickListener(new View.OnClickListener() //block 1 clicked
                 {
                     public void onClick(View v) {
                         if(pressed1==0) {
-                            if(!settings.getBoolean("FIRST_BLOCK",true)){
+                            if(!settings.getBoolean("FIRST_BLOCK",true)){ //if block 1 disabled
                                 Toast.makeText(HomeActivity.this, "Block 1 is not enabled",
                                         Toast.LENGTH_SHORT).show();
-                            }else{
+                            }else{ //block 1 enabled
                                 block_one.setBackgroundResource(R.drawable.green_square);
                                 pressed1=1;
                             }
@@ -141,14 +92,14 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
-                block_two.setOnClickListener(new View.OnClickListener()
+                block_two.setOnClickListener(new View.OnClickListener() //block 2 clicked
                 {
                     public void onClick(View v) {
                         if(pressed2==0) {
-                            if(!settings.getBoolean("SECOND_BLOCK",true)){
+                            if(!settings.getBoolean("SECOND_BLOCK",true)){ //if block 2 disabled
                                 Toast.makeText(HomeActivity.this, "Block 2 is not enabled",
                                         Toast.LENGTH_SHORT).show();
-                            }else{
+                            }else{ //block 2 enabled
                                 block_two.setBackgroundResource(R.drawable.green_square);
                                 pressed2=1;
                             }
@@ -161,14 +112,14 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
-                block_three.setOnClickListener(new View.OnClickListener()
+                block_three.setOnClickListener(new View.OnClickListener() //block 3 clicked
                 {
                     public void onClick(View v) {
                         if(pressed3==0) {
-                            if(!settings.getBoolean("THIRD_BLOCK",true)){
+                            if(!settings.getBoolean("THIRD_BLOCK",true)){ //if block 3 disabled
                                 Toast.makeText(HomeActivity.this, "Block 3 is not enabled",
                                         Toast.LENGTH_SHORT).show();
-                            }else{
+                            }else{ //block 3 enabled
                                 block_three.setBackgroundResource(R.drawable.green_square);
                                 pressed3=1;
                             }
@@ -182,12 +133,10 @@ public class HomeActivity extends AppCompatActivity {
                 });
 
                 Button water = (Button) dialog.findViewById(R.id.water_btn);
-                // if button is clicked, close the custom dialog
-                water.setOnClickListener(new View.OnClickListener() {
+                water.setOnClickListener(new View.OnClickListener() { //water button clicked
                     @Override
                     public void onClick(View v) {
-
-
+                        /////checks for combination of blocks pressed and passes appropriate parameters
                         if (pressed1 == 0 && pressed2 == 0 && pressed3 == 0) {                  // 0 0 0
                             Toast.makeText(HomeActivity.this, "Select at least one block",
                                     Toast.LENGTH_SHORT).show();
@@ -211,9 +160,7 @@ public class HomeActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        //log.d("argument[0]", argument[0]);
-                        /**call different functions based on pressed1, pressed2, pressed3 values (Raspberry Pi)**/
-
+                        //set everything back to default before closing dialog
                         block_one.setBackgroundResource(R.drawable.black_square);
                         block_two.setBackgroundResource(R.drawable.black_square);
                         block_three.setBackgroundResource(R.drawable.black_square);
@@ -307,7 +254,6 @@ public class HomeActivity extends AppCompatActivity {
                 });
 
                 Button enable = (Button) dialog.findViewById(R.id.enable_btn);
-                // if button is clicked, close the custom dialog
                 enable.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -381,16 +327,17 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
-                /* Change the IP to the IP you set in the arduino sketch */
+                /* IP of raspberry pi, params [0] = path/filename.extension, params[1] = variable=value */
                 URL url = new URL("http:/129.107.116.224/"+params[0]+"?"+params[1]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
+                //buffer for return string
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
                 String inputLine;
                 int i=0;
                 while ((inputLine = in.readLine()) != null)
-                    if (params[0].equals("sensors.txt")) {
+                    if (params[0].equals("sensors.txt")) { //if retrieving sensor readings
                         if (i == 0) {
                             Log.d("adding m1: ", inputLine);
                             AutoFarm.mSensor1.setMoisture(inputLine);
@@ -412,7 +359,6 @@ public class HomeActivity extends AppCompatActivity {
 
                 in.close();
                 connection.disconnect();
-                //Log.d("returned:", result.toString());
                 return result.toString();
 
             } catch (IOException e) {
@@ -425,7 +371,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() { //if back is pressed on home screen don't go back to previous activity. Exit app with confirmation dialog
         new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Exit")
                 .setMessage("Are you sure you want to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
