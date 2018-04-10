@@ -32,25 +32,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
 
         final Button monitor_btn = (Button) findViewById(R.id.monitor_button);
         final Button water_btn = (Button) findViewById(R.id.water_button);
         final Button settings_btn = (Button) findViewById(R.id.settings_button);
         final Button about_btn = (Button) findViewById(R.id.about_button);
-
-        final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
-
-        if(settings.getBoolean("FIRST_TIME",true)){
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("FIRST_TIME", false);
-            editor.putBoolean("FIRST_BLOCK", false);
-            editor.putBoolean("SECOND_BLOCK", false);
-            editor.putBoolean("THIRD_BLOCK", false);
-            //editor.putInt("SENSOR_ONE", 0);
-            //editor.putInt("SENSOR_TWO", 0);
-            //editor.putInt("SENSOR_THREE", 0);
-            editor.apply();
-        }
 
         monitor_btn.setOnClickListener(new View.OnClickListener()
         {
@@ -137,11 +124,11 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         /////checks for combination of blocks pressed and passes appropriate parameters
-                        if (pressed1 == 0 && pressed2 == 0 && pressed3 == 0) {                  // 0 0 0
+                        if (pressed1 == 0 && pressed2 == 0 && pressed3 == 0) {                 // 0 0 0
+                            new Background_get().execute("cgi-bin/water.php", "water=0");
                             Toast.makeText(HomeActivity.this, "Select at least one block",
                                     Toast.LENGTH_SHORT).show();
-                        } else {
-                            if (pressed1 == 1 && pressed2 == 1 && pressed3 == 1) {             // 1 1 1
+                        } else if (pressed1 == 1 && pressed2 == 1 && pressed3 == 1) {          // 1 1 1
                                 new Background_get().execute("cgi-bin/water.php", "water=1");
                             } else if (pressed1 == 1 && pressed2 == 1 && pressed3 == 0) {      // 1 1 0
                                 new Background_get().execute("cgi-bin/water.php", "water=2");
@@ -158,7 +145,6 @@ public class HomeActivity extends AppCompatActivity {
                             }
                             Toast.makeText(HomeActivity.this, "Watering plant(s)",
                                     Toast.LENGTH_SHORT).show();
-                        }
 
                         //set everything back to default before closing dialog
                         block_one.setBackgroundResource(R.drawable.black_square);
@@ -327,8 +313,10 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
+                final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
                 /* IP of raspberry pi, params [0] = path/filename.extension, params[1] = variable=value */
-                URL url = new URL("http:/129.107.116.224/"+params[0]+"?"+params[1]);
+                //URL url = new URL("http:/129.107.117.136/"+params[0]+"?"+params[1]);
+                URL url = new URL("http:/"+settings.getString("IP",null)+"/"+params[0]+"?"+params[1]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
                 //buffer for return string
@@ -338,25 +326,36 @@ public class HomeActivity extends AppCompatActivity {
                 int i=0;
                 while ((inputLine = in.readLine()) != null)
                     if (params[0].equals("sensors.txt")) { //if retrieving sensor readings
+                        SharedPreferences.Editor editor = settings.edit();
                         if (i == 0) {
                             Log.d("adding m1: ", inputLine);
-                            AutoFarm.mSensor1.setMoisture(inputLine);
-                            Log.d("added m1: ", String.valueOf(AutoFarm.getmSensor1().getMoisture()));
+                            //AutoFarm.mSensor1.setMoisture(inputLine);
+                            editor.putString("SENSOR_ONE",inputLine);
+                            //Log.d("added m1: ", String.valueOf(AutoFarm.getmSensor1().getMoisture()));
                         }else if (i == 1) {
                             Log.d("adding m2: ", inputLine);
-                            AutoFarm.mSensor2.setMoisture(inputLine);
-                            Log.d("added m2: ", String.valueOf(AutoFarm.getmSensor2().getMoisture()));
+                            //AutoFarm.mSensor2.setMoisture(inputLine);
+                            editor.putString("SENSOR_TWO",inputLine);
+                            //Log.d("added m2: ", String.valueOf(AutoFarm.getmSensor2().getMoisture()));
                         }else if (i == 2) {
                             Log.d("adding m3: ", inputLine);
-                            AutoFarm.mSensor3.setMoisture(inputLine);
-                            Log.d("added m3: ", String.valueOf(AutoFarm.getmSensor3().getMoisture()));
+                            //AutoFarm.mSensor3.setMoisture(inputLine);
+                            editor.putString("SENSOR_THREE", inputLine);
+                            //Log.d("added m3: ", String.valueOf(AutoFarm.getmSensor3().getMoisture()));
+                        }else if (i==3) {
+                            Log.d("adding w: ", inputLine);
+                            if(inputLine.equals("0")) {
+                                editor.putBoolean("HAS_WATER", false);
+                            }else{
+                                editor.putBoolean("HAS_WATER",true);
+                            }
                         }else {
                             Log.d("out of bounds. Index: ", String.valueOf(i));
                         }
+                        editor.commit();
                         i++;
                     }
                     result.append(inputLine).append("\n");
-
                 in.close();
                 connection.disconnect();
                 return result.toString();
@@ -367,8 +366,6 @@ public class HomeActivity extends AppCompatActivity {
             return null;
         }
     }
-
-
 
     @Override
     public void onBackPressed() { //if back is pressed on home screen don't go back to previous activity. Exit app with confirmation dialog

@@ -9,6 +9,8 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +24,14 @@ public class AboutActivity extends AppCompatActivity {
         final ImageView block1 = (ImageView) findViewById(R.id.block1_box);
         final ImageView block2 = (ImageView) findViewById(R.id.block2_box);
         final ImageView block3 = (ImageView) findViewById(R.id.block3_box);
+        final Button change_btn = (Button) findViewById(R.id.edit_btn);
+        change_btn.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v) {
+                Intent reg = new Intent(AboutActivity.this, EditActivity.class);
+                startActivity(reg); //launch register activity
+            }
+        });
 
         final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
         if(!settings.getBoolean("FIRST_BLOCK",false)){
@@ -60,25 +70,29 @@ public class AboutActivity extends AppCompatActivity {
         if(!settings.getBoolean("FIRST_BLOCK",true)) {
             m1text.setText("disabled");
         }else {
-            m1text.setText(String.valueOf(AutoFarm.getmSensor1().getMoisture()) + "");
+            //m1text.setText(String.valueOf(AutoFarm.getmSensor1().getMoisture()) + "");
+            m1text.setText(settings.getString("SENSOR_ONE","Null"));
         }
 
         TextView m2text = (TextView)findViewById(R.id.m2text);
         if(!settings.getBoolean("SECOND_BLOCK",true)) {
             m2text.setText("disabled");
         }else {
-            m2text.setText(String.valueOf(AutoFarm.getmSensor2().getMoisture()) + "");
+            //m2text.setText(String.valueOf(AutoFarm.getmSensor2().getMoisture()) + "");
+            m2text.setText(settings.getString("SENSOR_TWO","Null"));
         }
 
         TextView m3text = (TextView)findViewById(R.id.m3text);
         if(!settings.getBoolean("THIRD_BLOCK",true)) {
             m3text.setText("disabled");
         }else {
-            m3text.setText(String.valueOf(AutoFarm.getmSensor3().getMoisture()) + "");
+            //m3text.setText(String.valueOf(AutoFarm.getmSensor3().getMoisture()) + "");
+            m3text.setText(settings.getString("SENSOR_THREE","Null"));
         }
 
         TextView wtext = (TextView)findViewById(R.id.wtext);
-        if(AutoFarm.wSensor.getWater())
+        //if(AutoFarm.wSensor.getWater())
+        if(settings.getBoolean("HAS_WATER",false))
             wtext.setText("Yes");
         else
             wtext.setText("No");

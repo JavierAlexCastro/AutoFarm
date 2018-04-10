@@ -1,7 +1,9 @@
 package farmtechs.autofarm;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,10 +58,12 @@ public class MonitorActivity extends AppCompatActivity {
     }
 
     public void getImage() { //retrieve image from server
+        final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
 
         ImageView picture=(ImageView)findViewById(R.id.camera_image);
         Picasso.with(picture.getContext())
-                .load("http://129.107.116.224/image.jpg")
+                //.load("http://129.107.117.136/image.jpg")
+                .load("http://"+settings.getString("IP",null)+"/image.jpg")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .resize(300,300).into(picture);

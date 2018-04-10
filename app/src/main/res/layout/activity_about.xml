@@ -18,6 +18,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/block1_box"
                 android:src="@drawable/green_box"
                 android:layout_alignTop="@+id/text_block1"
@@ -31,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_block1"
-                android:text="Block 1"
+                android:text="@string/block_1"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
@@ -48,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/m1label"
                 android:layout_below="@+id/text_block1"
-                android:text="Moisture Level:"
+                android:text="@string/moisture_lvl"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
@@ -58,6 +59,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/m1box"
                 android:src="@drawable/whitebox"
                 android:layout_alignTop="@+id/m1text"
@@ -99,14 +101,10 @@
                 android:paddingEnd="5dp"
                 />
 
-
-
-
-
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/block2_box"
                 android:src="@drawable/green_box"
                 android:layout_alignTop="@+id/text_block2"
@@ -120,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_block2"
-                android:text="Block 2"
+                android:text="@string/block_2"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
@@ -137,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/m2label"
                 android:layout_below="@+id/text_block2"
-                android:text="Moisture Level:"
+                android:text="@string/moisture_lvl"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
@@ -147,6 +145,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/m2box"
                 android:src="@drawable/whitebox"
                 android:layout_alignTop="@+id/m2text"
@@ -191,6 +190,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/block3_box"
                 android:src="@drawable/green_box"
                 android:layout_alignTop="@+id/text_block3"
@@ -204,7 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_block3"
-                android:text="Block 3"
+                android:text="@string/block_3"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
@@ -221,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/m3label"
                 android:layout_below="@+id/text_block3"
-                android:text="Moisture Level:"
+                android:text="@string/moisture_lvl"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
@@ -231,6 +231,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/m3box"
                 android:src="@drawable/whitebox"
                 android:layout_alignTop="@+id/m3text"
@@ -275,6 +276,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/cd_about"
                 android:id="@+id/pump_box"
                 android:src="@drawable/blue_box"
                 android:layout_alignTop="@+id/text_pump"
@@ -288,7 +290,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text_pump"
-                android:text="Tank"
+                android:text="@string/tank"
                 android:textColor="@color/white"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
@@ -304,7 +306,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/wlabel"
                 android:layout_below="@+id/text_pump"
-                android:text="Has Water:"
+                android:text="@string/has_water"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
@@ -316,6 +318,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/wbox"
+                android:contentDescription="@string/cd_about"
                 android:src="@drawable/whitebox"
                 android:layout_alignTop="@+id/wtext"
                 android:layout_alignBottom="@+id/wtext"
@@ -339,6 +342,16 @@
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_btn"
+                android:text="Edit register info"
+                android:layout_below="@+id/wtext"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"/>
 
         </RelativeLayout>
 </ScrollView>

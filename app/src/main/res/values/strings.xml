@@ -7,4 +7,16 @@
     <string name="select_blocks_to_enable">Select block(s) to enable</string>
     <string name="title">My system</string>
     <string name="subtitle">Taken: %s</string>
+    <string name="register">Register</string>
+    <string name="email">Email:</string>
+    <string name="Pi_IP">Pi's IP:</string>
+    <string name="hint_email">example@email.com</string>
+    <string name="hint_ip">ex: 127.107.0.27</string>
+    <string name="block_1">Block 1</string>
+    <string name="block_2">Block 2</string>
+    <string name="block_3">Block 3</string>
+    <string name="tank">Tank</string>
+    <string name="moisture_lvl">Moisture Level:</string>
+    <string name="has_water">Has Water:</string>
+    <string name="cd_about">Background for block heading</string>
 </resources>
