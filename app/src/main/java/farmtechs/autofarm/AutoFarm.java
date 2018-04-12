@@ -40,6 +40,5 @@ class AutoFarm extends Application {
         return wSensor;
     }
 
-    //add for rest of objects
 
 }
