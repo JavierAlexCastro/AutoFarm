@@ -12,18 +12,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MoistureSensor ms1 = new MoistureSensor();
-        AutoFarm.setMSensor1(ms1);
-
-        MoistureSensor ms2 = new MoistureSensor();
-        AutoFarm.setMSensor2(ms2);
-
-        MoistureSensor ms3 = new MoistureSensor();
-        AutoFarm.setMSensor3(ms3);
-
-        WaterSensor ws = new WaterSensor();
-        AutoFarm.setWSensor(ws);
-
         final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
 
         if(settings.getBoolean("FIRST_TIME",true)){

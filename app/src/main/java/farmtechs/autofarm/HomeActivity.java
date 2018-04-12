@@ -328,22 +328,16 @@ public class HomeActivity extends AppCompatActivity {
                     if (params[0].equals("sensors.txt")) { //if retrieving sensor readings
                         SharedPreferences.Editor editor = settings.edit();
                         if (i == 0) {
-                            Log.d("adding m1: ", inputLine);
-                            //AutoFarm.mSensor1.setMoisture(inputLine);
+                            Log.d("adding m1: ",inputLine);
                             editor.putString("SENSOR_ONE",inputLine);
-                            //Log.d("added m1: ", String.valueOf(AutoFarm.getmSensor1().getMoisture()));
                         }else if (i == 1) {
-                            Log.d("adding m2: ", inputLine);
-                            //AutoFarm.mSensor2.setMoisture(inputLine);
+                            Log.d("adding m2: ",inputLine);
                             editor.putString("SENSOR_TWO",inputLine);
-                            //Log.d("added m2: ", String.valueOf(AutoFarm.getmSensor2().getMoisture()));
                         }else if (i == 2) {
-                            Log.d("adding m3: ", inputLine);
-                            //AutoFarm.mSensor3.setMoisture(inputLine);
+                            Log.d("adding m3: ",inputLine);
                             editor.putString("SENSOR_THREE", inputLine);
-                            //Log.d("added m3: ", String.valueOf(AutoFarm.getmSensor3().getMoisture()));
                         }else if (i==3) {
-                            Log.d("adding w: ", inputLine);
+                            Log.d("adding w: ",inputLine);
                             if(inputLine.equals("0")) {
                                 editor.putBoolean("HAS_WATER", false);
                             }else{
@@ -379,7 +373,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                        finish();
+                        //finish();
                         System.exit(0);
                     }
                 }).setNegativeButton("No", null).show();

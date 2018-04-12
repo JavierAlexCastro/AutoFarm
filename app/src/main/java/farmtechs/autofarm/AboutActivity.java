@@ -70,7 +70,6 @@ public class AboutActivity extends AppCompatActivity {
         if(!settings.getBoolean("FIRST_BLOCK",true)) {
             m1text.setText("disabled");
         }else {
-            //m1text.setText(String.valueOf(AutoFarm.getmSensor1().getMoisture()) + "");
             m1text.setText(settings.getString("SENSOR_ONE","Null"));
         }
 
@@ -78,7 +77,6 @@ public class AboutActivity extends AppCompatActivity {
         if(!settings.getBoolean("SECOND_BLOCK",true)) {
             m2text.setText("disabled");
         }else {
-            //m2text.setText(String.valueOf(AutoFarm.getmSensor2().getMoisture()) + "");
             m2text.setText(settings.getString("SENSOR_TWO","Null"));
         }
 
@@ -86,12 +84,10 @@ public class AboutActivity extends AppCompatActivity {
         if(!settings.getBoolean("THIRD_BLOCK",true)) {
             m3text.setText("disabled");
         }else {
-            //m3text.setText(String.valueOf(AutoFarm.getmSensor3().getMoisture()) + "");
             m3text.setText(settings.getString("SENSOR_THREE","Null"));
         }
 
         TextView wtext = (TextView)findViewById(R.id.wtext);
-        //if(AutoFarm.wSensor.getWater())
         if(settings.getBoolean("HAS_WATER",false))
             wtext.setText("Yes");
         else

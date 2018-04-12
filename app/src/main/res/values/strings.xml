@@ -9,7 +9,7 @@
     <string name="subtitle">Taken: %s</string>
     <string name="register">Register</string>
     <string name="email">Email:</string>
-    <string name="Pi_IP">Pi's IP:</string>
+    <string name="Pi_IP">Pi\'s IP:</string>
     <string name="hint_email">example@email.com</string>
     <string name="hint_ip">ex: 127.107.0.27</string>
     <string name="block_1">Block 1</string>
