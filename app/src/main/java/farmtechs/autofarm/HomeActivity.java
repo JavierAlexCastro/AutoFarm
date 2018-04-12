@@ -374,7 +374,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         //finish();
-                        System.exit(0);
+                        //System.exit(0);
                     }
                 }).setNegativeButton("No", null).show();
     }

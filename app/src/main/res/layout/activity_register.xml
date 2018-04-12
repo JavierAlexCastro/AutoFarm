@@ -78,6 +78,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/ip_input"
         android:layout_marginTop="60dp"
-        android:background="@drawable/apply_button_effect"/>
+        android:background="@drawable/continue_button_effect"/>
 
 </RelativeLayout>
