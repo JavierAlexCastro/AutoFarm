@@ -3,11 +3,13 @@ package farmtechs.autofarm;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -301,9 +303,20 @@ public class HomeActivity extends AppCompatActivity {
         {
             public void onClick(View v) {
                 new Background_get().execute("sensors.txt", " ");
+                final ProgressDialog dialog = ProgressDialog.show(HomeActivity.this, "", "Fetching sensor information..",
+                        true);
+                dialog.show();
 
-                Intent about = new Intent(HomeActivity.this, AboutActivity.class);
-                startActivity(about);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        dialog.dismiss();
+                        Intent about = new Intent(HomeActivity.this, AboutActivity.class);
+                        startActivity(about);
+                    }
+                }, 3000);
+
+
             }
         });
 
@@ -359,6 +372,7 @@ public class HomeActivity extends AppCompatActivity {
             }
             return null;
         }
+
     }
 
     @Override
@@ -373,8 +387,6 @@ public class HomeActivity extends AppCompatActivity {
                         intent.addCategory(Intent.CATEGORY_HOME);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                        //finish();
-                        //System.exit(0);
                     }
                 }).setNegativeButton("No", null).show();
     }
