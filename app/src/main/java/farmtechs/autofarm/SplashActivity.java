@@ -14,6 +14,7 @@ public class SplashActivity extends AppCompatActivity {
 
         final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
 
+        //if it's the first time the user opens the app load defaults
         if(settings.getBoolean("FIRST_TIME",true)){
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("FIRST_TIME", false);
@@ -29,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         }
 
 
+        //launch register activity
         Intent home = new Intent(this, RegisterActivity.class);
         startActivity(home);
         finish();

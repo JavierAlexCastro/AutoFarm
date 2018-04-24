@@ -23,6 +23,7 @@ public class MonitorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monitor);
 
+        //get the current timestamp
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
         // textView for timestamp
@@ -51,6 +52,7 @@ public class MonitorActivity extends AppCompatActivity {
 
     }
 
+    //if the user clicks the back button while on the monitor activity, go home
     @Override
     public void onBackPressed() {
         Intent home = new Intent(MonitorActivity.this, HomeActivity.class);
@@ -62,7 +64,6 @@ public class MonitorActivity extends AppCompatActivity {
 
         ImageView picture=(ImageView)findViewById(R.id.camera_image);
         Picasso.with(picture.getContext())
-                //.load("http://129.107.117.136/image.jpg")
                 .load("http://"+settings.getString("IP",null)+"/image.jpg")
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)

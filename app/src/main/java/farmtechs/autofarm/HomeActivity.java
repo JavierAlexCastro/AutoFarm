@@ -36,11 +36,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
 
+        //get buttons from layout file
         final Button monitor_btn = (Button) findViewById(R.id.monitor_button);
         final Button water_btn = (Button) findViewById(R.id.water_button);
         final Button settings_btn = (Button) findViewById(R.id.settings_button);
         final Button about_btn = (Button) findViewById(R.id.about_button);
 
+        //when the monitor button is clicked
         monitor_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
@@ -51,17 +53,20 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //when the water button is clicked
         water_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(HomeActivity.this); //create dialog
+                final Dialog dialog = new Dialog(HomeActivity.this); //create custom dialog
                 dialog.setContentView(R.layout.activity_water); //sets layout to dialog
 
+                //get buttons from layout
                 final Button block_one = (Button) dialog.findViewById(R.id.block1_image); //get button context
                 final Button block_two = (Button) dialog.findViewById(R.id.block2_image);
                 final Button block_three = (Button) dialog.findViewById(R.id.block3_image);
 
+                //if the user clicks first block
                 block_one.setOnClickListener(new View.OnClickListener() //block 1 clicked
                 {
                     public void onClick(View v) {
@@ -74,13 +79,14 @@ public class HomeActivity extends AppCompatActivity {
                                 pressed1=1;
                             }
                         }
-                        else{
+                        else{ //block 1 already pressed, but pressed again
                             block_one.setBackgroundResource(R.drawable.black_square);
                             pressed1=0;
                         }
                     }
                 });
 
+                //if the user clicks second block
                 block_two.setOnClickListener(new View.OnClickListener() //block 2 clicked
                 {
                     public void onClick(View v) {
@@ -94,13 +100,14 @@ public class HomeActivity extends AppCompatActivity {
                             }
 
                         }
-                        else{
+                        else{ //block 2 already pressed, but pressed again
                             block_two.setBackgroundResource(R.drawable.black_square);
                             pressed2=0;
                         }
                     }
                 });
 
+                //if the user clicks third block
                 block_three.setOnClickListener(new View.OnClickListener() //block 3 clicked
                 {
                     public void onClick(View v) {
@@ -114,14 +121,16 @@ public class HomeActivity extends AppCompatActivity {
                             }
 
                         }
-                        else{
+                        else{ //block 3 already pressed, but pressed again
                             block_three.setBackgroundResource(R.drawable.black_square);
                             pressed3=0;
                         }
                     }
                 });
 
+                //get water button
                 Button water = (Button) dialog.findViewById(R.id.water_btn);
+                //if the user clicks the water button
                 water.setOnClickListener(new View.OnClickListener() { //water button clicked
                     @Override
                     public void onClick(View v) {
@@ -156,7 +165,7 @@ public class HomeActivity extends AppCompatActivity {
                         pressed2 = 0;
                         pressed3 = 0;
 
-                        dialog.dismiss();
+                        dialog.dismiss(); //close custom dialog
                     }
                 });
 
@@ -167,86 +176,94 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //if settings button is pressed
         settings_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
 
-                final Dialog dialog = new Dialog(HomeActivity.this);
+                final Dialog dialog = new Dialog(HomeActivity.this); //custom layout
                 dialog.setContentView(R.layout.activity_enable);
 
+                //get buttons from layout file
                 final Button block_one = (Button) dialog.findViewById(R.id.block1_image);
                 final Button block_two = (Button) dialog.findViewById(R.id.block2_image);
                 final Button block_three = (Button) dialog.findViewById(R.id.block3_image);
 
 
                 final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
-                if(settings.getBoolean("FIRST_BLOCK",false)){
+                if(settings.getBoolean("FIRST_BLOCK",false)){ //if enabled load green block
                     block_one.setBackgroundResource(R.drawable.green_square);
                     pressed1=1;
                 } else{
-                    block_one.setBackgroundResource(R.drawable.black_square);
+                    block_one.setBackgroundResource(R.drawable.black_square); //load gray block
                 }
-                if(settings.getBoolean("SECOND_BLOCK",false)){
+                if(settings.getBoolean("SECOND_BLOCK",false)){ //if enabled load green block
                     block_two.setBackgroundResource(R.drawable.green_square);
                     pressed2=1;
                 } else{
-                    block_two.setBackgroundResource(R.drawable.black_square);
+                    block_two.setBackgroundResource(R.drawable.black_square); //load gray block
                 }
-                if(settings.getBoolean("THIRD_BLOCK",false)){
+                if(settings.getBoolean("THIRD_BLOCK",false)){ //if enable dload green block
                     block_three.setBackgroundResource(R.drawable.green_square);
                     pressed3=1;
                 } else{
-                    block_three.setBackgroundResource(R.drawable.black_square);
+                    block_three.setBackgroundResource(R.drawable.black_square); //load gray block
                 }
 
+                //if block 1 is pressed
                 block_one.setOnClickListener(new View.OnClickListener()
                 {
                     public void onClick(View v) {
-                        if(pressed1==0) {
+                        if(pressed1==0) { //if previously disabled, change block to green
                             block_one.setBackgroundResource(R.drawable.green_square);
                             pressed1=1;
                         }
-                        else{
+                        else{ //if previously enabled, change block to gray
                             block_one.setBackgroundResource(R.drawable.black_square);
                             pressed1=0;
                         }
                     }
                 });
 
+                //if block 2 is pressed
                 block_two.setOnClickListener(new View.OnClickListener()
                 {
                     public void onClick(View v) {
-                        if(pressed2==0) {
+                        if(pressed2==0) { //if previously disabled, change block to green
                             block_two.setBackgroundResource(R.drawable.green_square);
                             pressed2=1;
                         }
-                        else{
+                        else{ //if previously enabled, change block to gray
                             block_two.setBackgroundResource(R.drawable.black_square);
                             pressed2=0;
                         }
                     }
                 });
 
+                //if block 2 is pressed
                 block_three.setOnClickListener(new View.OnClickListener()
                 {
                     public void onClick(View v) {
-                        if(pressed3==0) {
+                        if(pressed3==0) { //if previously disabled, change block to green
                             block_three.setBackgroundResource(R.drawable.green_square);
                             pressed3=1;
                         }
-                        else{
+                        else{ //if previously enabled, change block to gray
                             block_three.setBackgroundResource(R.drawable.black_square);
                             pressed3=0;
                         }
                     }
                 });
 
+                //get enable button from layout file
                 Button enable = (Button) dialog.findViewById(R.id.enable_btn);
+                //if enable button is clicked
                 enable.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
                             SharedPreferences.Editor editor = settings.edit();
+                            //save preferences
                             if(pressed1 == 1){
                                 editor.putBoolean("FIRST_BLOCK",true);
                             }else if(pressed1 == 0){
@@ -262,8 +279,9 @@ public class HomeActivity extends AppCompatActivity {
                             }else if(pressed3 == 0){
                                 editor.putBoolean("THIRD_BLOCK",false);
                             }
-                            editor.apply();
+                            editor.apply(); //apply changes
 
+                            //send configuration to file in raspberry pi
                             if(pressed1==1 && pressed2==1 && pressed3==1) {             // 1 1 1
                                 new Background_get().execute("cgi-bin/pumps.php", "pump=1");
                             } else if(pressed1==1 && pressed2==1 && pressed3==0) {      // 1 1 0
@@ -282,6 +300,7 @@ public class HomeActivity extends AppCompatActivity {
                                 new Background_get().execute("cgi-bin/pumps.php", "pump=8");
                             }
 
+                            //set everything back to default
                             pressed1 = 0;
                             pressed2 = 0;
                             pressed3 = 0;
@@ -299,14 +318,17 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //if the info button is clicked
         about_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
-                new Background_get().execute("sensors.txt", " ");
+                new Background_get().execute("sensors.txt", " "); //get sensor readings from raspberry pi
+                //create a progress dialog while the app retrieves the information
                 final ProgressDialog dialog = ProgressDialog.show(HomeActivity.this, "", "Fetching sensor information..",
                         true);
                 dialog.show();
 
+                //after 3 seconds close the dialog and open the about activity
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -322,49 +344,49 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    //function that sends http requests to webserver hosted in the raspberry pi
     private class Background_get extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             try {
                 final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
                 /* IP of raspberry pi, params [0] = path/filename.extension, params[1] = variable=value */
-                //URL url = new URL("http:/129.107.117.136/"+params[0]+"?"+params[1]);
                 URL url = new URL("http:/"+settings.getString("IP",null)+"/"+params[0]+"?"+params[1]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection(); //open a connection
 
                 //buffer for return string
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
-                String inputLine;
+                String inputLine; //string for each line read
                 int i=0;
                 while ((inputLine = in.readLine()) != null)
                     if (params[0].equals("sensors.txt")) { //if retrieving sensor readings
                         SharedPreferences.Editor editor = settings.edit();
-                        if (i == 0) {
+                        if (i == 0) { //first line is first sensor
                             Log.d("adding m1: ",inputLine);
                             editor.putString("SENSOR_ONE",inputLine);
-                        }else if (i == 1) {
+                        }else if (i == 1) { //second line is second sensor
                             Log.d("adding m2: ",inputLine);
                             editor.putString("SENSOR_TWO",inputLine);
-                        }else if (i == 2) {
+                        }else if (i == 2) { //third line is third sensor
                             Log.d("adding m3: ",inputLine);
                             editor.putString("SENSOR_THREE", inputLine);
-                        }else if (i==3) {
+                        }else if (i==3) { //fourth line is water sensor
                             Log.d("adding w: ",inputLine);
                             if(inputLine.equals("0")) {
-                                editor.putBoolean("HAS_WATER", false);
+                                editor.putBoolean("HAS_WATER", false); //if it doesn't have water
                             }else{
-                                editor.putBoolean("HAS_WATER",true);
+                                editor.putBoolean("HAS_WATER",true); //if it has water
                             }
                         }else {
                             Log.d("out of bounds. Index: ", String.valueOf(i));
                         }
-                        editor.commit();
+                        editor.commit(); //save readings
                         i++;
                     }
                     result.append(inputLine).append("\n");
                 in.close();
-                connection.disconnect();
+                connection.disconnect(); //close connection
                 return result.toString();
 
             } catch (IOException e) {
@@ -375,6 +397,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    //if user presses back while on homescreen
     @Override
     public void onBackPressed() { //if back is pressed on home screen don't go back to previous activity. Exit app with confirmation dialog
         new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Exit")
@@ -388,7 +411,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
-                }).setNegativeButton("No", null).show();
+                }).setNegativeButton("No", null).show(); //create a confirmation message and close if user clicks yes
     }
 
 }

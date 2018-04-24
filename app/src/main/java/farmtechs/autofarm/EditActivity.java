@@ -33,25 +33,27 @@ public class EditActivity extends AppCompatActivity {
 
         final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
 
+        //get resources from layout
         final Button continue_btn = (Button) findViewById(R.id.apply_btn);
         final EditText email = (EditText)findViewById(R.id.email_input);
         final EditText ip = (EditText)findViewById(R.id.ip_input);
-        ip.setText(settings.getString("IP",""), TextView.BufferType.EDITABLE);
+        ip.setText(settings.getString("IP",""), TextView.BufferType.EDITABLE); //load previous IP in case they just want to change their email
 
 
+        //if they hit the continue button
         continue_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v) {
                 try{
-                    String email_address = email.getText().toString();
-                    String ip_address = ip.getText().toString();
-                    if(!email_address.isEmpty() && !ip_address.isEmpty()){
-                        new EditActivity.Background_get().execute("cgi-bin/email.php", "mail="+email_address);
+                    String email_address = email.getText().toString(); //get the email they typed as a string
+                    String ip_address = ip.getText().toString(); //get the ip they typed as a string
+                    if(!email_address.isEmpty() && !ip_address.isEmpty()){ //check that they are not empty
+                        new EditActivity.Background_get().execute("cgi-bin/email.php", "mail="+email_address); //save email in raspberry pi
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("IP", ip_address);
+                        editor.putString("IP", ip_address); //save ip inside app
                         editor.apply();
                         Intent home = new Intent(EditActivity.this, HomeActivity.class);
-                        startActivity(home); //launch monitor activity
+                        startActivity(home); //launch home activity
                     }
                     else{
                         Toast.makeText(getBaseContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
@@ -65,6 +67,7 @@ public class EditActivity extends AppCompatActivity {
         });
     }
 
+    //function that sends http requests to webserver hosted by raspberry pi
     private class Background_get extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -72,12 +75,12 @@ public class EditActivity extends AppCompatActivity {
                 final SharedPreferences settings = getSharedPreferences("PREFS_NAME", Context.MODE_PRIVATE);
                 /* IP of raspberry pi, params [0] = path/filename.extension, params[1] = variable=value */
                 URL url = new URL("http:/"+settings.getString("IP",null)+"/"+params[0]+"?"+params[1]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection(); //establish a connection
 
                 //buffer for return string
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder result = new StringBuilder();
-                String inputLine;
+                String inputLine; //string for each line read
                 int i=0;
                 while ((inputLine = in.readLine()) != null)
                     if (params[0].equals("sensors.txt")) { //if retrieving sensor readings
@@ -102,8 +105,8 @@ public class EditActivity extends AppCompatActivity {
                     }
                 result.append(inputLine).append("\n");
 
-                in.close();
-                connection.disconnect();
+                in.close(); //close buffered reader
+                connection.disconnect(); //close connection
                 return result.toString();
 
             } catch (IOException e) {
@@ -113,6 +116,7 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    //this method helps the hidesoftKeyboard method
     public void setupUI(View view) {
 
         // Set up touch listener for non-text box views to hide keyboard.
@@ -134,6 +138,7 @@ public class EditActivity extends AppCompatActivity {
         }
     }
 
+    //hides the keyboard when the user clicks something else other than the edittexts
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(
